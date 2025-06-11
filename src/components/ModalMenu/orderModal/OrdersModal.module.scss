@@ -1,0 +1,137 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(23, 25, 31, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modalContent {
+  background-color: #E5E0DD;
+  padding: 30px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #852632;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #D49F24;
+  }
+}
+
+.modalTitle {
+  color: #17191F;
+  margin-bottom: 25px;
+  text-align: center;
+  font-size: 24px;
+}
+
+.loadingStatus,
+.errorStatus,
+.emptyStatus {
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+}
+
+.errorStatus {
+  color: #852632;
+}
+
+.emptyStatus {
+  color: #17191F;
+}
+
+.ordersList {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.orderCard {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #FD952E;
+}
+
+.orderHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.orderTitle {
+  color: #17191F;
+  font-size: 20px;
+  margin: 0;
+}
+
+.orderDate {
+  color: #852632;
+  font-size: 14px;
+}
+
+.orderSection {
+  margin-bottom: 15px;
+}
+
+.sectionLabel {
+  font-weight: bold;
+  color: #17191F;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.sectionText {
+  color: #17191F;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.photoWrapper {
+  margin-top: 10px;
+}
+
+.orderPhoto {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 4px;
+  border: 1px solid #E5E0DD;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.orderStatus {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px dashed #87BAF9;
+  font-size: 15px;
+}
+
+.statusValue {
+  color: #FD952E;
+  font-weight: bold;
+}

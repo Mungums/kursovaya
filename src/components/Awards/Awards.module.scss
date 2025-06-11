@@ -1,0 +1,92 @@
+@import '../../styles/abstracts/mixins';
+
+.awards {
+  margin-top: 57px;
+  margin-bottom: 96px
+}
+
+.awards_title {
+  @include headline2;
+  color: #FD952E;
+  margin-bottom: 40px;
+}
+
+.title {
+    @include label;
+    color: #852632;
+}
+
+.desc {
+    @include body1;
+    color: #852632;
+}
+
+.list_awards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 270px);
+  margin: 0 auto;
+  justify-content: center;
+  gap: 11.1vw;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.award_card {
+  
+  position: relative;
+  width: 100%;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  overflow: visible;
+  transition: transform 0.5s ease;
+  
+  &:hover {
+    transform: translateX(60px);
+    z-index: 10;
+  }
+
+}
+
+.img_award {
+  width: 270px;
+  top: 0;
+  left: 0;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  transform-origin: left;
+  border-radius: 5px;
+  transition: transform 0.8s ease;
+  position: absolute;
+  z-index: 2;
+
+  .award_card:hover & {
+    transform: rotateY(-120deg);
+  }
+}
+
+.award_background {
+  aspect-ratio: 3 / 4;
+  position: relative;
+  height: 100%;
+  width: 270px;
+  border-radius: 5px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  pointer-events: none; // предотвращаем случайные клики
+
+  &_top {
+    background: linear-gradient(90deg, #FFFFFF 0%, rgba(133, 38, 50, 0.75) 100%);
+    border-radius: 5px 0px 0px 0px;
+    padding: 10px;
+    flex: 0 0 auto;
+  }
+
+  &_bottom {
+    background: linear-gradient(269.97deg, rgba(172, 172, 172, 0.5625) 0.02%, rgba(255, 255, 255, 0.75) 99.24%);
+    border-radius: 0px 0px 0px 5px;
+    padding: 10px;
+    flex: 1;
+  }
+}

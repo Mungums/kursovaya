@@ -1,0 +1,27 @@
+@import '../../styles/abstracts/mixins';
+
+.custom-button{
+    @include buttons;
+    background: #FD952E;
+}
+
+.auth-button {
+    @include buttons;
+    background-color: #404040;
+    border: 2px solid #E5E0DD;
+}
+
+.anchor-button-hero {
+    @include buttons;
+    background: #FD952E;
+    position: absolute;
+    left: 44.444vw;
+    top: 70.944vh;
+}
+
+.anchor-button {
+    @include buttons;
+    background: #FD952E;
+    margin: 0 auto;
+}
+

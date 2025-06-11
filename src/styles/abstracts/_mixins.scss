@@ -1,0 +1,79 @@
+@import './variables';
+
+@mixin headline1 {
+    text-align: center;
+    font-family: $font-headline1-family;
+    font-weight: $font-headline1-weight;
+    font-size: $font-headline1-size;
+    line-height: $font-headline1-line-height;
+}
+
+@mixin headline2{
+    font-family: $font-headline1-family;
+    font-weight: $font-headline1-weight;
+    font-size: $font-headline2-size;
+    line-height: $font-headline2-line-height;
+    text-align: center;
+
+}
+
+@mixin headline3 {
+    font-family: $font-headline1-family;
+    font-weight: $font-headline1-weight;
+    font-size: $font-headline3-size;
+    line-height: $font-headline3-line-height;
+    text-align: center;
+}
+
+@mixin headline4 {
+    font-family: $font-headline4-family;
+    font-weight: $font-headline4-weight;
+    font-size: $font-headline4-size;
+    line-height: $font-headline4-line-height;
+    text-align: center;
+}
+
+@mixin label {
+    font-family: $font-label-family;
+    font-weight: $font-label-weight;
+    font-size: $font-label-size;
+    line-height: $font-label-line-height;
+    text-align: center;
+}
+
+@mixin body1{
+    font-family: $font-body1-family;
+    font-weight: $font-body1-weight;
+    font-size: $font-body1-size;
+    line-height: $font-body1-line-height;
+    text-align: center;
+}
+
+@mixin body2{
+    font-family: $font-body1-family;
+    font-weight: $font-body1-weight;
+    font-size: $font-body2-size;
+    line-height: $font-body2-line-height;
+    text-align: center;
+}
+
+@mixin buttons {
+    @include label;
+    color: white;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    padding: 12px 1.632vw;
+    transition: all 0.2s;
+    cursor: pointer;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 10px rgba(253, 149, 46, 0.3);
+    }
+}

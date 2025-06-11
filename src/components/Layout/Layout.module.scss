@@ -1,0 +1,77 @@
+@import '../../styles/abstracts/mixins';
+
+.realised {
+    @include headline2;
+    color: #FD952E;
+    margin-bottom: 40px;
+}
+
+.background {
+    background-color: rgba($color: #17191F, $alpha: 0.1);
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 24px;
+}
+
+.project_cards{
+    display: grid;
+    grid-template-columns: repeat(2, 0fr); 
+    grid-template-rows:  repeat(2, 1fr);
+    gap: 5.15vw;
+    margin-bottom: 50px;
+    justify-content: center;
+}
+
+.project_card{
+    overflow: hidden;
+    width: 30.6123vw;
+    height: 20.2287vw;
+    box-sizing: border-box;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 8px 7px 10px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 24px;
+
+    .project_desc{
+        @include headline4;
+        color: #E5E0DD;
+        width: 349px;
+        text-align: left;
+    }
+    
+    .img_project{
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .desc_background {
+        position: absolute;
+        z-index: 3;
+        background-color: #17191F;
+        width: 97%;
+        height: 62.74px;
+        padding: 3.37px 0 3.37px 15px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        transform: translateY(100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 1, 1);
+    }
+    
+    &:hover {
+        .desc_background {
+            transform: translateY(0);
+        }
+    }
+}
+@media (width <= 790px) {
+    .project_cards{
+    grid-template-columns: repeat(1, 0fr); 
+    }
+    
+    .project_card:nth-child(n+3){
+        display: none;
+    }
+}
