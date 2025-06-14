@@ -1,27 +1,81 @@
 @import '../../styles/abstracts/mixins';
 
-.custom-button{
-    @include buttons;
-    background: #FD952E;
+.custom-button {
+  @include buttons;
+  background: #FD952E;
 }
 
 .auth-button {
-    @include buttons;
-    background-color: #404040;
-    border: 2px solid #E5E0DD;
+  @include buttons;
+  background-color: #404040;
+  border: 2px solid #E5E0DD;
 }
 
 .anchor-button-hero {
-    @include buttons;
-    background: #FD952E;
-    position: absolute;
-    left: 44.444vw;
-    top: 70.944vh;
+  @include buttons;
+  background: #FD952E;
+  top: 71vh;
+  text-decoration: none;
 }
 
 .anchor-button {
-    @include buttons;
-    background: #FD952E;
-    margin: 0 auto;
+  @include buttons;
+  background: #FD952E;
+  margin: 0 auto;
 }
 
+@media (max-width: 1024px) {
+  .custom-button,
+  .auth-button,
+  .anchor-button,
+  .anchor-button-hero {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .anchor-button-hero {
+    top: 72vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .custom-button,
+  .auth-button,
+  .anchor-button,
+  .anchor-button-hero {
+    font-size: 0.95rem;
+    padding: 0.65rem 1.25rem;
+  }
+
+  .anchor-button-hero {
+    top: 73vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .custom-button,
+  .auth-button,
+  .anchor-button,
+  .anchor-button-hero {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .anchor-button-hero {
+    top: 75vh;
+  }
+}
+
+@media (max-width: 360px) {
+  .custom-button,
+  .auth-button,
+  .anchor-button,
+  .anchor-button-hero {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.9rem;
+  }
+
+  .anchor-button-hero {
+    top: 76vh;
+  }
+}

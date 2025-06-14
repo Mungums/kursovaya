@@ -1,0 +1,129 @@
+@import '../../styles/abstracts/mixins';
+
+$break-lg: 1024px;
+$break-md: 480px;
+
+// Карточка основывается на 248×367
+$card-min: 190px;
+$card-base: 248px;
+$card-max: 320px;
+
+.awards {
+  margin: 57px 0 96px;
+}
+
+.awards_title {
+  @include headline2;
+  color: #FD952E;
+  margin-bottom: 40px;
+}
+
+.title {
+  @include label;
+  color: #852632;
+}
+
+.desc {
+  @include body1;
+  color: #852632;
+}
+
+.list_awards {
+  display: grid;
+  margin: 0 auto 40px;
+  justify-content: center;
+  width: 100%;
+
+  // >1245px — три колонки, базовый диапазон
+  @media (min-width: 1246px) {
+    grid-template-columns: repeat(3, clamp(#{$card-min}, 17.2vw, #{$card-max}));
+    gap: 70px 80px;
+  }
+
+  // 1000px–1245px — чуть уменьшили на 40px
+  @media (min-width: 1000px) and (max-width: 1245px) {
+    grid-template-columns: repeat(3, clamp(280px, 20vw, 320px));
+    gap: 60px 70px;
+  }
+
+  // 481px–1024px — две колонки, 3-я по центру
+  @media (max-width: #{$break-lg}) and (min-width: $break-md + 1) {
+    grid-template-columns: repeat(2, clamp(#{$card-min}, 30vw, #{$card-max}));
+    gap: 40px 50px;
+
+    & > :nth-child(3) {
+      grid-column: 1 / -1;
+      justify-self: center;
+    }
+  }
+
+  // ≤480px — одна колонка
+  @media (max-width: #{$break-md}) {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.award_card {
+  position: relative;
+  width: clamp(#{$card-min}, 17.2vw, #{$card-max});
+  height: calc(clamp(#{$card-min}, 17.2vw, #{$card-max}) * 1.48);
+  margin: 0 auto;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+
+  // 1000px–1245px: чуть уменьшаем на 40px
+  @media (min-width: 1000px) and (max-width: 1245px) {
+    width: clamp(280px, 20vw, 320px);
+    height: calc(clamp(280px, 20vw, 320px) * 1.48);
+  }
+
+  &:hover,
+  &:active {
+    transform: translateX(60px);
+    z-index: 10;
+
+    .img_award {
+      transform: rotateY(-120deg);
+    }
+  }
+}
+
+.img_award {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+  transform-origin: left;
+  transition: transform 0.8s ease;
+  z-index: 2;
+}
+
+.award_background {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  pointer-events: none;
+
+  &_top {
+    background: linear-gradient(90deg, #FFFFFF 0%, rgba(133, 38, 50, 0.75) 100%);
+    padding: 10px;
+    border-radius: 5px 0 0 0;
+    flex: 0 0 auto;
+  }
+
+  &_bottom {
+    background: linear-gradient(270deg, rgba(172, 172, 172, 0.56) 0%, rgba(255, 255, 255, 0.75) 100%);
+    padding: 10px;
+    border-radius: 0 0 0 5px;
+    flex: 1;
+  }
+}

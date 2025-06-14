@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './Order.module.scss';
 import { faPaperPlane, faCamera, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,6 +17,12 @@ export default function Order() {
 
   const { submitOrder, loading, error, success } = useOrderLogic();
 
+  const [dateValue, setDateValue] = useState('');
+
+  const minDate = new Date();
+  minDate.setDate(minDate.getDate() + 6);
+  const minDateStr = minDate.toISOString().split('T')[0];
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -32,6 +38,7 @@ export default function Order() {
     try {
       await submitOrder(orderData);
       form.reset();
+      setDateValue('');
       previewImages.forEach(img => URL.revokeObjectURL(img.src));
       fileInputRef.current.value = '';
     } catch (err) {
@@ -41,15 +48,19 @@ export default function Order() {
 
   return (
     <div className={style.Order}>
-      <div className='container'>
+      <div className="container">
         <div className={style.compact_order}>
           <h2 className={style.title}>Заказать проект</h2>
 
-          {error && <div className={style.error}>
-            {error.includes('<!DOCTYPE html>') ? 'Ошибка сервера' : error}
-          </div>}
+          {error && (
+            <div className={style.error}>
+              {error.includes('<!DOCTYPE html>') ? 'Ошибка сервера' : error}
+            </div>
+          )}
           
-          {success && <div className={style.success}>Заказ успешно отправлен!</div>}
+          {success && (
+            <div className={style.success}>Заказ успешно отправлен!</div>
+          )}
 
           <form className={style.compact_form} onSubmit={handleSubmit}>
             <div className={style.form_row}>
@@ -60,15 +71,28 @@ export default function Order() {
                 placeholder="Название проекта" 
                 required
               />
-              <input 
-                type="date" 
-                name="projectDate"
-                className={style.input} 
-                placeholder="Дата" 
-                required
-              />
+
+              <div className={style.date_wrapper}>
+                <input
+                  type="date"
+                  name="projectDate"
+                  id="projectDate"
+                  className={style.input_date}
+                  min={minDateStr}
+                  required
+                  value={dateValue}
+                  onChange={(e) => setDateValue(e.target.value)}
+                  placeholder="Окончание проекта"
+                />
+                <label
+                  htmlFor="projectDate"
+                  className={style.date_placeholder}
+                >
+                  Окончание проекта
+                </label>
+              </div>
             </div>
-            
+
             <div className={style.desc}>
               <textarea 
                 name="description"

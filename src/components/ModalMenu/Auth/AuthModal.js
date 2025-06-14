@@ -84,10 +84,7 @@ const AuthModal = ({ isOpen, onClose, onSuccess, onSwitchToRegister }) => {
             </ButtonAnchor>
           </div>
         </form>
-        
-        <div className={styles.toggle_form}>
-          Нет аккаунта? <button onClick={onSwitchToRegister}>Зарегистрироваться</button>
-        </div>
+
       </div>
     </div>
   );

@@ -139,10 +139,7 @@ const ModalMenu = ({ isOpen, onClose, onSuccess, onSwitchToLogin }) => {
             </ButtonAnchor>
           </div>
         </form>
-        
-        <div className={styles.toggle_form}>
-          Уже есть аккаунт? <button onClick={onSwitchToLogin}>Войти</button>
-        </div>
+
       </div>
     </div>
   );
