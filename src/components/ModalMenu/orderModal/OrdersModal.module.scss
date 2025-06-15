@@ -224,3 +224,148 @@
   justify-content: flex-end;
   gap: 10px;
 }
+
+// Адаптивность
+@media (max-width: 768px) {
+  .modalContent {
+    padding: 20px;
+    max-height: 90vh;
+  }
+
+  .modalTitle {
+    font-size: 20px;
+  }
+
+  .orderCard {
+    padding: 15px;
+  }
+
+  .orderTitle {
+    font-size: 18px;
+  }
+
+  .orderDate {
+    font-size: 12px;
+  }
+
+  .sectionLabel {
+    font-size: 14px;
+  }
+
+  .sectionText {
+    font-size: 14px;
+  }
+
+  .orderStatus {
+    font-size: 14px;
+  }
+
+  .editButton,
+  .deleteButton {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+
+  .editModal {
+    padding: 20px;
+  }
+
+  .editModal h3 {
+    font-size: 18px;
+  }
+
+  .editModal label input,
+  .editModal label textarea {
+    font-size: 13px;
+    padding: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  .orderHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .orderActions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .editButton,
+  .deleteButton {
+    width: 100%;
+  }
+
+  .modalTitle {
+    font-size: 18px;
+  }
+
+  .orderCard {
+    padding: 12px;
+  }
+}
+
+// Универсальный адаптив
+.modalContent {
+  padding: clamp(15px, 4vw, 30px);
+  max-width: 95vw;
+  max-height: 90vh;
+}
+
+.modalTitle {
+  font-size: clamp(18px, 2.5vw, 24px);
+}
+
+.orderCard {
+  padding: clamp(15px, 3vw, 25px);
+}
+
+.orderTitle {
+  font-size: clamp(16px, 2.3vw, 20px);
+}
+
+.orderDate,
+.sectionLabel,
+.sectionText,
+.orderStatus {
+  font-size: clamp(12px, 2vw, 16px);
+}
+
+.editButton,
+.deleteButton {
+  padding: clamp(6px, 1.5vw, 8px) clamp(10px, 3vw, 12px);
+  font-size: clamp(12px, 1.8vw, 16px);
+  width: fit-content;
+}
+
+.orderActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.orderPhoto {
+  max-width: 100%;
+  max-height: 40vh;
+}
+
+.editModal {
+  padding: clamp(15px, 4vw, 25px);
+}
+
+.editModal h3 {
+  font-size: clamp(16px, 2.2vw, 20px);
+}
+
+.editModal input,
+.editModal textarea {
+  font-size: clamp(13px, 2vw, 16px);
+  padding: clamp(6px, 1.5vw, 10px);
+}
