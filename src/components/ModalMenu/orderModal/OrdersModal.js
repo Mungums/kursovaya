@@ -20,7 +20,7 @@ const OrdersModal = ({ isOpen, onClose }) => {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://91.109.225.193:8000/api/orders/${id}`, {
+      await fetch(`${process.env.REACT_APP_API_URL}/orders/${id}`, {
         method: 'DELETE',
       });
       alert('Заявка удалена');
@@ -33,7 +33,7 @@ const OrdersModal = ({ isOpen, onClose }) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      await fetch(`http://91.109.225.193:8000/api/orders/${editOrder.id}`, {
+      await fetch(`${process.env.REACT_APP_API_URL}/orders/${editOrder.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
