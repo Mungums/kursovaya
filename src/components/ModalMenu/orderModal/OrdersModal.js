@@ -3,7 +3,7 @@ import { useShowOrders } from '../../Header/showOrder';
 import style from './OrdersModal.module.scss';
 
 const OrdersModal = ({ isOpen, onClose }) => {
-  const { orders, loading, error } = useShowOrders(); // предполагаем, что тут тоже должен быть refetch для обновления после удаления/редактирования
+  const { orders, loading, error, refreshOrders } = useShowOrders();
   const [editOrder, setEditOrder] = useState(null);
   const [formData, setFormData] = useState({ title: '', description: '', due_date: '' });
 
@@ -20,31 +20,47 @@ const OrdersModal = ({ isOpen, onClose }) => {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`${process.env.REACT_APP_API_URL}/orders/${id}`, {
+      const token = localStorage.getItem('auth_token');
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/orders/${id}`, {
         method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/json',
+        },
       });
+
+      if (!response.ok) throw new Error('Ошибка при удалении');
+
       alert('Заявка удалена');
-      window.location.reload(); // можно заменить на refetch, если он доступен из useShowOrders
+      refreshOrders();
     } catch (err) {
       alert('Ошибка при удалении');
+      console.error(err);
     }
   };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      await fetch(`${process.env.REACT_APP_API_URL}/orders/${editOrder.id}`, {
+      const token = localStorage.getItem('auth_token');
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/orders/${editOrder.id}`, {
         method: 'PUT',
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify(formData),
       });
+
+      if (!response.ok) throw new Error('Ошибка при обновлении');
+
       alert('Заявка обновлена');
       setEditOrder(null);
-      window.location.reload(); // или refetch
+      refreshOrders();
     } catch (err) {
       alert('Ошибка при обновлении');
+      console.error(err);
     }
   };
 
@@ -66,13 +82,11 @@ const OrdersModal = ({ isOpen, onClose }) => {
         <h2 className={style.modalTitle}>Ваши заказы</h2>
 
         {loading && <div className={style.loadingStatus}>Загрузка данных...</div>}
-
         {error && (
           <div className={style.errorStatus}>
             Ошибка: {error}. Попробуйте обновить страницу.
           </div>
         )}
-
         {!loading && !error && orders.length === 0 && (
           <div className={style.emptyStatus}>У вас пока нет заказов</div>
         )}
@@ -140,7 +154,6 @@ const OrdersModal = ({ isOpen, onClose }) => {
           ))}
         </div>
 
-        {/* Модалка редактирования */}
         {editOrder && (
           <div className={style.editModalOverlay} onClick={() => setEditOrder(null)}>
             <div className={style.editModal} onClick={(e) => e.stopPropagation()}>
