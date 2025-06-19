@@ -1,55 +1,49 @@
 import { useState, useEffect } from 'react';
-
-/**
- * Хук для загрузки заказов текущего пользователя
- */
-export const useShowOrders = () => {
+export const useShowOrders = () => { // Кастомный хук для получения списка заказов с сервера
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  /**
-   * Загрузка заказов с API
-   */
-  const fetchOrders = async () => {
-    setLoading(true);
-    setError(null);
 
+  const fetchOrders = async () => {  // Асинхронная функция получения заказов
+    setLoading(true);     // Включаем индикатор загрузки
+    setError(null);       // Сброс предыдущих ошибок
     try {
-      const token = localStorage.getItem('auth_token');
-      if (!token) throw new Error('Требуется авторизация');
 
+      const token = localStorage.getItem('auth_token');      // Получение токена авторизации из localStorage
+      if (!token) throw new Error('Требуется авторизация');
       const response = await fetch(`${process.env.REACT_APP_API_URL}/orders`, {
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Accept': 'application/json',
+          'Authorization': `Bearer ${token}`,  // Передаём токен в заголовке
+          'Accept': 'application/json',        // Указываем, что ожидаем JSON
         },
       });
 
-      if (!response.ok) {
+
+      if (!response.ok) {      // Если статус ответа не OK — обрабатываем как ошибку
         const errorData = await response.json().catch(() => ({}));
         throw new Error(errorData.message || `Ошибка сервера: ${response.status}`);
       }
-
-      const { data } = await response.json();
+      const { data } = await response.json();      // Получаем данные из ответа и сохраняем заказы в состояние
       setOrders(data || []);
     } catch (err) {
-      setError(err.message);
+      setError(err.message);      // В случае ошибки сохраняем её текст в состояние и логируем в консоль
       console.error('Ошибка загрузки заказов:', err);
     } finally {
-      setLoading(false);
+      setLoading(false);      // Выключаем индикатор загрузки вне зависимости от успеха запроса
     }
   };
 
-  // Загружаем заказы при первом рендере
+  // useEffect вызывается при первом монтировании компонента
+  // автоматически загружает список заказов
   useEffect(() => {
     fetchOrders();
   }, []);
 
   return {
-    orders,
-    loading,
-    error,
-    refreshOrders: fetchOrders, // Можно использовать без перезагрузки
+    orders,            // список заказов
+    loading,           // индикатор загрузки
+    error,             // сообщение об ошибке
+    refreshOrders: fetchOrders, // функция обновления данных вручную
   };
 };
